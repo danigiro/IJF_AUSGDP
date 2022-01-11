@@ -1,3 +1,14 @@
+#' -----------------------------------------------------------------------------
+#' EXP_features_snaive.R
+#'
+#' Creating an RData file with the EXP ARIMA and SRW base forecasts.
+#'
+#' Input files: EXP_basef.RData
+#' Output files: EXP_arima_bf.RData EXP_means.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(forecast)
 library(tidyverse)

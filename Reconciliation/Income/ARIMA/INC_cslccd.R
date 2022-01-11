@@ -24,10 +24,9 @@ rm(libs)
 library(FoReco)
 load("./BaseForecasts/Income/INC_arima_bf.RData")
 load("./BaseForecasts/Income/INC_means.RData")
-load("./Inc_bal.RData")
-#source("./Reconciliation/C_balanced.R")
+source("./Reconciliation/C_balanced.R")
 DF <- NULL
-#obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
+obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
 C <- obj_bal$Cb
 nl <- c(1, 3, 5, 7, 8)
 id_unbal <- which(obj_bal$id_bal %in% c(1:6))
@@ -39,8 +38,7 @@ mvdf$Series <- factor(mvdf$Series, colnames(Inc), ordered = TRUE)
 DFbase$Series <- factor(DFbase$Series, colnames(Inc), ordered = TRUE)
 resmat_all <- resmat_ARIMA
 time_cslev <- array(NA, dim = c(test_length, 1, 4),
-                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod", 
-                                                  "HCCCendod", "bCCCendod")))
+                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod")))
 
 for (j in 1:test_length) { #test_length
   resmat <- resmat_all[[j]]

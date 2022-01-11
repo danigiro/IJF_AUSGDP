@@ -1,3 +1,22 @@
+#' -----------------------------------------------------------------------------
+#' INC_csmix.R
+#'
+#' Averaging hts using the bts base forecasts from both models (SRW and ETS)
+#' for GDP Inc
+#'
+#' Base forecasts: ARIMA
+#'
+#' Reconcile forecasts (+ nn):
+#'       - mix-wls (wls and m-wls)
+#'       - mix-ols (ols and m-ols)
+#'       - mix-shr (shr and m-shr)
+#'
+#' Input files: INC_htsrec.RData INC_htsrec_mean.RData INC_arima_bf.RData
+#' Output files: INC_csmix.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(tidyverse)
 

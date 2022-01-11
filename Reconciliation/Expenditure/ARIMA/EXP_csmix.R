@@ -1,3 +1,22 @@
+#' -----------------------------------------------------------------------------
+#' EXP_csmix.R
+#'
+#' Averaging hts using the bts base forecasts from both models (SRW and ETS)
+#' for GDP Exp
+#'
+#' Base forecasts: ARIMA
+#'
+#' Reconcile forecasts (+ nn):
+#'       - mix-wls (wls and m-wls)
+#'       - mix-ols (ols and m-ols)
+#'       - mix-shr (shr and m-shr)
+#'
+#' Input files: EXP_htsrec.RData EXP_htsrec_mean.RData EXP_arima_bf.RData
+#' Output files: EXP_csmix.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(tidyverse)
 

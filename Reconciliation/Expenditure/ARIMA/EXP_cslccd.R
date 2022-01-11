@@ -37,8 +37,7 @@ mvdf$Series <- factor(mvdf$Series, colnames(Exp), ordered = TRUE)
 DFbase$Series <- factor(DFbase$Series, colnames(Exp), ordered = TRUE)
 resmat_all <- resmat_ARIMA
 time_cslev <- array(NA, dim = c(test_length, 1, 4),
-                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod", 
-                                                  "HCCCendod", "bCCCendod")))
+                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod")))
 
 for (j in 1:test_length) { #test_length
   resmat <- resmat_all[[j]]

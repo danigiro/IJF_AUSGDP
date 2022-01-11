@@ -1,3 +1,14 @@
+#' -----------------------------------------------------------------------------
+#' INC_features_snaive.R
+#'
+#' Creating an RData file with the INC ARIMA and SRW base forecasts.
+#'
+#' Input files: INC_basef.RData
+#' Output files: INC_arima_bf.RData INC_means.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(forecast)
 library(tidyverse)

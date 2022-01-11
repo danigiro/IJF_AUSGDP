@@ -6,10 +6,13 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-Reconciliation of quarterly Australian GDP forecasts from Income and
+The quarterly Australian GDP reconciliation forecasts from Income and
 Expenditure sides.
 
 ## Files
+
+**Note:** the analysis folders are divided by the two different
+hierarchies. *TYPE* can indicate Income/INC or Expenditure/EXP.
 
 -   **BaseForecasts**: scripts to use the base forecasts in
     Bisaglia (2020) and to calculate the naive forecasts:

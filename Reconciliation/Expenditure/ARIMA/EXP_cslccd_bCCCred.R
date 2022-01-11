@@ -1,3 +1,20 @@
+#' -----------------------------------------------------------------------------
+#' EXP_cslccd_bCCCred.R
+#'
+#' Creating an RData file of conditional levels reconciled forecasts for GDP
+#' (cross-sectional framework, balance version) - diagonal covariance matrix
+#'
+#' Base forecasts: ARIMA
+#'
+#' Reconcile forecasts (+ nn):
+#'       - bLCCred (basef + exogenous + diagonal cov + no BU)
+#'
+#' Input files: EXP_arima_bf.RData EXP_means.RData
+#' Output files: EXP_cslccd_bCCCred.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(FoReco)
 library(tidyverse)

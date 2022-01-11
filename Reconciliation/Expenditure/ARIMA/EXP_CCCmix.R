@@ -1,3 +1,19 @@
+#' -----------------------------------------------------------------------------
+#' EXP_CCCmix.R
+#'
+#' Averaging CCC using the bts base forecasts from both models (SA and ETS)
+#'
+#' Base forecasts: ARIMA
+#'
+#' Reconcile forecasts (+ nn):
+#'       - mix-CCC (mCCC and bCCC)
+#'
+#' Input files: EXP_cslccd.RData EXP_cslccd_mean.RData EXP_arima_bf.RData
+#' Output files: EXP_CCCmix.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(tidyverse)
 

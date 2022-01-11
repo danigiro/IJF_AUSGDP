@@ -1,13 +1,29 @@
+#' -----------------------------------------------------------------------------
+#' INC_cslccd_bCCCred.R
+#'
+#' Creating an RData file of conditional levels reconciled forecasts for GDP
+#' (cross-sectional framework, balance version) - diagonal covariance matrix
+#'
+#' Base forecasts: ARIMA
+#'
+#' Reconcile forecasts (+ nn):
+#'       - bLCCred (basef + exogenous + diagonal cov + no BU)
+#'
+#' Input files: INC_arima_bf.RData INC_means.RData
+#' Output files: INC_cslccd_bCCCred.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(FoReco)
 library(tidyverse)
 
 load("./BaseForecasts/Income/INC_arima_bf.RData")
 load("./BaseForecasts/Income/INC_means.RData")
-load("./Inc_bal.RData")
-#source("./Reconciliation/C_balanced.R")
+source("./Reconciliation/C_balanced.R")
 DF <- NULL
-#obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
+obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
 C <- obj_bal$Cb
 nl <- c(1, 3, 5, 7, 8)
 id_unbal <- which(obj_bal$id_bal %in% c(1:6))

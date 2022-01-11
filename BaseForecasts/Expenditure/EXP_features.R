@@ -1,3 +1,14 @@
+#' -----------------------------------------------------------------------------
+#' EXP_features.R
+#'
+#' Creating an RData file with the SA base forecasts.
+#'
+#' Input files: EXP_basef.RData
+#' Output files: EXP_means_sa.RData
+#'
+#' This code is written by Daniele Girolimetto
+#' Department of Statistics, University of Padua (Italy)
+#' -----------------------------------------------------------------------------
 rm(list = ls(all = TRUE))
 library(forecast)
 library(tidyverse)

@@ -21,10 +21,9 @@ library(tidyverse)
 
 load("./BaseForecasts/Income/INC_arima_bf.RData")
 load("./BaseForecasts/Income/INC_means.RData")
-load("./Inc_bal.RData")
-#source("./Reconciliation/C_balanced.R")
+source("./Reconciliation/C_balanced.R")
 DF <- NULL
-#obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
+obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
 C <- obj_bal$Cb
 nl <- c(1, 3, 5, 7, 8)
 id_unbal <- which(obj_bal$id_bal %in% c(1:6))
