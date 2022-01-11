@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 The quarterly Australian GDP reconciliation forecasts from Income and
-Expenditure sides.
+Expenditure sides (Athanasopoulos et al., 2019).
 
 ## Files
 
@@ -43,8 +43,13 @@ hierarchies. *TYPE* can indicate Income/INC or Expenditure/EXP.
 
 ## References
 
+Athanasopoulos, G., Gamakumara, P., Panagiotelis, A., Hyndman, R.J.,
+Affan, M., 2019. *Hierarchical Forecasting*, in: Fuleky, P. (Ed.),
+Macroeconomic Forecasting in the Era of Big Data. Springer, Cham,
+pp. 689–719. <doi:10.1007/978-3-030-31150-6_21>.
+
 Bisaglia, L., Di Fonzo, T., Girolimetto, D., 2020. *Fully reconciled GDP
 forecasts from Income and Expenditure sides*, in: Pollice, A., Salvati,
-N., Schirripa Spagnolo, F. (Eds.), Book of Short Papers SIS 2020. Pear-
-son, pp. 951–956. URL:
+N., Schirripa Spagnolo, F. (Eds.), Book of Short Papers SIS 2020.
+Pearson, pp. 951–956. URL:
 <https://it.pearson.com/content/dam/region-core/italy/pearson-italy/pdf/Docenti/Universit%C3%A0/Pearson-SIS-2020-atti-convegno.pdf>.
