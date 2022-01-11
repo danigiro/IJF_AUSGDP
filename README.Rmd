@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 <!-- badges: start -->
 <!-- badges: end -->
 
-Reconciliation of quarterly Australian GDP forecasts from Income and Expenditure sides
+Reconciliation of quarterly Australian GDP forecasts from Income and Expenditure sides.
 
 ## Files
 

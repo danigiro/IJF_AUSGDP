@@ -7,7 +7,7 @@
 <!-- badges: end -->
 
 Reconciliation of quarterly Australian GDP forecasts from Income and
-Expenditure sides
+Expenditure sides.
 
 ## Files
 
