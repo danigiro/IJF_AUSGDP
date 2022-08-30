@@ -30,17 +30,23 @@ The forecast reconciliation is performed using **FoReco 0.2.2**.
 
 * **Reconciliation**: 
   - `TYPE/ARIMA`:
-    * `TYPE_cslccd_bCCCred.R`: LCC with ARIMA bts
-    * `TYPE_cslccd_bLCC.R`: LxCC with ARIMA bts (x = level number)
-    * `TYPE_cslccd_mean_red.R`: LCC with SRW bts
+    * `TYPE_cslccd_bCCCred.R`: LCC with ARIMA bts (exogenous)
+    * `TYPE_cslccd_bCCCred_endo.R`: LCC with ARIMA bts (endogenous)
+    * `TYPE_cslccd_bLCC.R`: LxCC with ARIMA bts (x = level number, exogenous)
+    * `INC_cslccd_bLCCendo.R`: LxCC with ARIMA bts (x = level number, endogenous)
+    * `TYPE_cslccd_mean_red.R`: LCC with SRW bts (exogenous)
+    * `TYPE_cslccd_mean_red_endo.R`: LCC with SRW bts (endogenous)
     * `TYPE_cslccd_mean.R`: CCC with SRW bts
-    * `TYPE_cslccd_mLCC.R`: LxCC with SRW bts (x = level number)
+    * `TYPE_cslccd_mLCC.R`: LxCC with SRW bts (x = level number, exogenous)
+    * `TYPE_cslccd_mLCCendo.R`: LxCC with SRW bts (x = level number, endogenous)
     * `TYPE_cslccd_sa.R`: CCC with SA bts
     * `TYPE_cslccd.R`: CCC with ARIMA bts and CCCH
     * `TYPE_htsrec_mean.R`: cross-sectional reconciliation with SRW bts
     * `TYPE_htsrec.R`: cross-sectional reconciliation with ARIMA bts
-    * `TYPE_CCCmix_red.R`: sample average of LCC (SRW + ARIMA bts)
-    * `TYPE_CCCmix.R`: sample average of CCC (SRW + ARIMA bts)
+    * `TYPE_CCCmix_red.R`: sample average of LCC (SRW + ARIMA bts, exogenous)
+    * `TYPE_CCCmix_red_endo.R`: sample average of LCC (SRW + ARIMA bts, endogenous)
+    * `TYPE_CCCmix.R`: sample average of CCC (SRW + ARIMA bts, exogenous)
+    * `TYPE_CCCmix_endo.R`: sample average of CCC (SRW + ARIMA bts, endogenous)
     * `TYPE_csmix.R`: sample average of the cross-sectional reconciliation (SRW + ARIMA bts)
   - `TYPE/function`: functions for `TYPE/score/TYPE_scores_arima.R` 
   - `TYPE/score/TYPE_scores_arima.R`: returns the scores' dataset
@@ -48,4 +54,4 @@ The forecast reconciliation is performed using **FoReco 0.2.2**.
 ## References
 Athanasopoulos, G., Gamakumara, P., Panagiotelis, A., Hyndman, R.J., Affan, M., 2019. _Hierarchical Forecasting_, in: Fuleky, P. (Ed.), Macroeconomic Forecasting in the Era of Big Data. Springer, Cham, pp. 689–719. doi:10.1007/978-3-030-31150-6_21.
 
-Di Fonzo, T. and Girolimetto D. (2022). _Forecast combination based forecast reconciliation: insights and extensions_, preprint submitted to the International Journal of Forecasting
+Di Fonzo, T. and Girolimetto D. (2022). _Forecast combination based forecast reconciliation: insights and extensions_, International Journal of Forecasting, in press. [10.1016/j.ijforecast.2022.07.00](https://doi.org/10.1016/j.ijforecast.2022.07.001)

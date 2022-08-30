@@ -9,6 +9,8 @@
 #' Reconcile forecasts:
 #'       - HCCCexod (Hollyman + CCC + exogenous + diagonal cov)
 #'       - bCCCexod (basef + CCC + exogenous + diagonal cov)
+#'       - HCCCendod (Hollyman + CCC + endogenous + diagonal cov)
+#'       - bCCCendod (basef + CCC + endogenous + diagonal cov)
 #'
 #' Input files: INC_arima_bf.RData, INC_means.RData
 #' Output files: INC_cslccd.RData
@@ -24,9 +26,10 @@ rm(libs)
 library(FoReco)
 load("./BaseForecasts/Income/INC_arima_bf.RData")
 load("./BaseForecasts/Income/INC_means.RData")
-source("./Reconciliation/C_balanced.R")
+load("./Inc_bal.RData")
+#source("./Reconciliation/C_balanced.R")
 DF <- NULL
-obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
+#obj_bal <- C_balanced(C = C, nl = c(1,1,2,1,1))
 C <- obj_bal$Cb
 nl <- c(1, 3, 5, 7, 8)
 id_unbal <- which(obj_bal$id_bal %in% c(1:6))
@@ -38,7 +41,8 @@ mvdf$Series <- factor(mvdf$Series, colnames(Inc), ordered = TRUE)
 DFbase$Series <- factor(DFbase$Series, colnames(Inc), ordered = TRUE)
 resmat_all <- resmat_ARIMA
 time_cslev <- array(NA, dim = c(test_length, 1, 4),
-                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod")))
+                    dimnames = list(NULL, NULL, c("HCCCexod", "bCCCexod", 
+                                                  "HCCCendod", "bCCCendod")))
 
 for (j in 1:test_length) { #test_length
   resmat <- resmat_all[[j]]
@@ -108,6 +112,39 @@ for (j in 1:test_length) { #test_length
   
   Df1 <- cbind(Fltr, "Forecasts" = as.vector(Recon_PointF),
                "R-method" = "cslcc", "R-comb" = "bCCCexod", 
+               nn = all(Recon_PointF>=0), 
+               FoReco = "direct")
+  Df1 <- Df1[c(names(DFbase), "R-comb", "nn", "FoReco")]
+  DF <- rbind(DF, Df1)
+  
+  # HCCCendod (Hollyman + CCC + endogenous + diagonal cov) ----
+  Start <- Sys.time()
+  objHe <- suppressMessages(lccrec(basef = basef, C = C, nl = nl, 
+                                   bnaive = bnaive[,-c(1:NROW(C))], const = "endo",
+                                   CCC = TRUE, weights = fixv))
+  End <- Sys.time()
+  time_cslev[j,1,3] <- as.numeric(difftime(End, Start, units = "secs"))
+  
+  Recon_PointF <- cbind(objHe$recf[, id_unbal, drop = FALSE], objHe$recf[, -c(1:NROW(C)), drop = FALSE])
+  
+  Df1 <- cbind(Fltr, "Forecasts" = as.vector(Recon_PointF),
+               "R-method" = "cslcc", "R-comb" = "HCCCendod", 
+               nn = all(Recon_PointF>=0), 
+               FoReco = "direct")
+  Df1 <- Df1[c(names(DFbase), "R-comb", "nn", "FoReco")]
+  DF <- rbind(DF, Df1)
+  
+  # bCCCendod (basef + CCC + endogenous + diagonal cov) ----
+  Start <- Sys.time()
+  objbe <- suppressMessages(lccrec(basef = basef, C = C, nl = nl, const = "endo",
+                                   CCC = TRUE, weights = fixv))
+  End <- Sys.time()
+  time_cslev[j,1,4] <- as.numeric(difftime(End, Start, units = "secs"))
+  
+  Recon_PointF <- cbind(objbe$recf[, id_unbal, drop = FALSE], objbe$recf[, -c(1:NROW(C)), drop = FALSE])
+  
+  Df1 <- cbind(Fltr, "Forecasts" = as.vector(Recon_PointF),
+               "R-method" = "cslcc", "R-comb" = "bCCCendod", 
                nn = all(Recon_PointF>=0), 
                FoReco = "direct")
   Df1 <- Df1[c(names(DFbase), "R-comb", "nn", "FoReco")]

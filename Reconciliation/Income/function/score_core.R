@@ -115,6 +115,66 @@ try(expr = {
   rm(list=setdiff(ls(), obj))
 }, silent = TRUE)
 
+## cslccd_bLCCendo ----
+print("--------------------------")
+try(expr = {
+  load("./Reconciliation/Income/ARIMA/INC_cslccd_bLCCendo.RData")
+  DFcslev <- DFcslev %>% 
+    add_column(K = 1) %>% 
+    mutate(Series = factor(Series, series, ordered = TRUE))
+  i <- i + 1
+  all[[i]] <- mcb_data(DFcslev)
+  rm(list=setdiff(ls(), obj))
+}, silent = TRUE)
+
+## cslccd_mLCC endo----
+print("--------------------------")
+try(expr = {
+  load("./Reconciliation/Income/ARIMA/INC_cslccd_mLCCendo.RData")
+  DFcslev <- DFcslev %>% 
+    add_column(K = 1) %>% 
+    mutate(Series = factor(Series, series, ordered = TRUE))
+  i <- i + 1
+  all[[i]] <- mcb_data(DFcslev)
+  rm(list=setdiff(ls(), obj))
+}, silent = TRUE)
+
+## cslccd_mean_red endo----
+print("--------------------------")
+try(expr = {
+  load("./Reconciliation/Income/ARIMA/INC_cslccd_mean_red_endo.RData")
+  DFcslcc <- DFcslcc %>% 
+    add_column(K = 1) %>% 
+    mutate(Series = factor(Series, series, ordered = TRUE))
+  i <- i + 1
+  all[[i]] <- mcb_data(DFcslcc)
+  rm(list=setdiff(ls(), obj))
+}, silent = TRUE)
+
+## mixCCC endo----
+print("--------------------------")
+try(expr = {
+  load("./Reconciliation/Income/ARIMA/INC_CCCmix_endo.RData")
+  DFmix <- DFmix %>% 
+    add_column(K = 1) %>% 
+    mutate(Series = factor(Series, series, ordered = TRUE))
+  i <- i + 1
+  all[[i]] <- mcb_data(DFmix)
+  rm(list=setdiff(ls(), obj))
+}, silent = TRUE)
+
+## mixCCCred endo----
+print("--------------------------")
+try(expr = {
+  load("./Reconciliation/Income/ARIMA/INC_CCCmix_red_endo.RData")
+  DFmix <- DFmix %>% 
+    add_column(K = 1) %>% 
+    mutate(Series = factor(Series, series, ordered = TRUE))
+  i <- i + 1
+  all[[i]] <- mcb_data(DFmix)
+  rm(list=setdiff(ls(), obj))
+}, silent = TRUE)
+
 ## mixCCCred ----
 print("--------------------------")
 try(expr = {

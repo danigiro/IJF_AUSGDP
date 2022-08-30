@@ -1,5 +1,5 @@
 #' -----------------------------------------------------------------------------
-#' EXP_cslccd_mean.R
+#' EXP_cslccd_mean_red_endo.R
 #'
 #' Creating an RData file of conditional levels reconciled forecasts for GDP 
 #' (cross-sectional framework) - diagonal covariance matrix 
@@ -7,11 +7,10 @@
 #' Base forecasts: ARIMA
 #' 
 #' Reconcile forecasts:
-#'       - mCCCexod (means + CCC + exogenous + diagonal cov)
-#'       - mCCCendod (means + CCC + exogenous + diagonal cov)
+#'       - mCCCred (means + exogenous + diagonal cov, 1:7)
 #'
 #' Input files: EXP_arima_bf.RData, EXP_means.RData
-#' Output files: EXP_cslccd_mean.RData
+#' Output files: EXP_cslccd_mean_red.RData
 #'
 #' This code is written by Daniele Girolimetto
 #' Department of Statistics, University of Padua (Italy)
@@ -33,8 +32,9 @@ test_length <- as.numeric(max(DFbase$Replication))
 mvdf$Series <- factor(mvdf$Series, colnames(Exp), ordered = TRUE)
 DFbase$Series <- factor(DFbase$Series, colnames(Exp), ordered = TRUE)
 resmat_all <- resmat_ARIMA
-time_cslev <- array(NA, dim = c(test_length, 1, 2),
-                    dimnames = list(NULL, NULL, c("mCCCexod", "mCCCendod")))
+
+time_cslev <- array(NA, dim = c(test_length, 1, 1),
+                    dimnames = list(NULL, NULL, c("mCCCexod")))
 
 for (j in 1:test_length) { #test_length
   basef <- DFbase %>% filter(Replication==j) %>% 
@@ -70,36 +70,17 @@ for (j in 1:test_length) { #test_length
     arrange(Series, `Forecast Horizon`)
   
   ## Reconciliation ----
-  # mCCCexod (means + CCC + exogenous + diagonal cov) ----
   Start <- Sys.time()
-  objH <- suppressWarnings(lccrec(basef = basef, C = C, nl = nl, 
-                                  CCC = TRUE, weights = fixv[-c(1:NROW(C))]))
+  objH <- suppressWarnings(lccrec(basef = basef, C = C, nl = nl, const = "endogenous",
+                                  CCC = TRUE, weights = fixv))
   End <- Sys.time()
   time_cslev[j,1,1] <- as.numeric(difftime(End, Start, units = "secs"))
   
-  Recon_PointF <- objH$recf
-  Recon_PointF <- cbind(Recon_PointF[, id_unbal, drop = FALSE], Recon_PointF[, -c(1:NROW(C)), drop = FALSE])
-  
-  Df1 <- cbind(Fltr, "Forecasts" = as.vector(Recon_PointF),
-               "R-method" = "cslcc", "R-comb" = "mCCCexod", 
-               nn = all(Recon_PointF>=0), 
-               FoReco = "direct")
-  Df1 <- Df1[c(names(DFbase), "R-comb", "nn", "FoReco")]
-  DF <- rbind(DF, Df1)
-  
-  # mCCCendod (means + CCC + endogenous + diagonal cov) ----
-  Start <- Sys.time()
-  objHe <- suppressWarnings(lccrec(basef = basef, C = C, nl = nl,
-                                   const = "endo", CCC = TRUE, weights = fixv))
-  End <- Sys.time()
-  time_cslev[j,1,2] <- as.numeric(difftime(End, Start, units = "secs"))
-  
-  Recon_PointF <- objHe$recf
-  Recon_PointF <- cbind(Recon_PointF[, id_unbal, drop = FALSE], Recon_PointF[, -c(1:NROW(C)), drop = FALSE])
-  
-  Df1 <- cbind(Fltr, "Forecasts" = as.vector(Recon_PointF),
-               "R-method" = "cslcc", "R-comb" = "mCCCendod",
-               nn = all(Recon_PointF>=0),
+  mCCCred <- Reduce("+", objH$levrecf[-length(objH$levrecf)])/(length(objH$levrecf)-1)
+  mCCCred <- cbind(mCCCred[, id_unbal, drop = FALSE], mCCCred[, -c(1:NROW(C)), drop = FALSE])
+  Df1 <- cbind(Fltr, "Forecasts" = as.vector(mCCCred),
+               "R-method" = "cslcc", "R-comb" = "mCCCred_endo", 
+               nn = all(mCCCred>=0), 
                FoReco = "direct")
   Df1 <- Df1[c(names(DFbase), "R-comb", "nn", "FoReco")]
   DF <- rbind(DF, Df1)
@@ -109,4 +90,4 @@ for (j in 1:test_length) { #test_length
 
 DFcslcc <- DF
 save(DFcslcc, time_cslev, 
-     file="./Reconciliation/Expenditure/ARIMA/EXP_cslccd_mean.RData")
+     file="./Reconciliation/Expenditure/ARIMA/EXP_cslccd_mean_red_endo.RData")
