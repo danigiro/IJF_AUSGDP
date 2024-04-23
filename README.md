@@ -61,9 +61,10 @@ hierarchies. *TYPE* stands for either Income/INC or Expenditure/EXP.
 Athanasopoulos, G., Gamakumara, P., Panagiotelis, A., Hyndman, R.J.,
 Affan, M., 2019. *Hierarchical Forecasting*, in: Fuleky, P. (Ed.),
 Macroeconomic Forecasting in the Era of Big Data. Springer, Cham,
-pp. 689–719. <doi:10.1007/978-3-030-31150-6_21>.
+pp. 689–719. 
+doi:[10.1007/978-3-030-31150-6_21](https://doi.org/10.1007/978-3-030-31150-6_21)
 
 Di Fonzo, T. and Girolimetto D. (2024). *Forecast combination based
 forecast reconciliation: insights and extensions*, International Journal
 of Forecasting, 40(2), pp. 490-514.
-[10.1016/j.ijforecast.2022.07.00](https://doi.org/10.1016/j.ijforecast.2022.07.001)
+doi:[10.1016/j.ijforecast.2022.07.00](https://doi.org/10.1016/j.ijforecast.2022.07.001)
